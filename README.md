@@ -4,7 +4,7 @@
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=28&duration=4000&pause=1000&color=CBA6F7&center=true&vCenter=true&multiline=true&repeat=true&width=900&height=120&lines=%F0%9F%8C%BE+Unix-like+Windows+Experience;%E2%9A%A1+Clean+%26+Customized;%F0%9F%8E%A8+Catppuccin+Theme+Everywhere)](https://git.io/typing-svg)
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=500&color=8B949E&center=true&vCenter=true&width=800&lines=Windows+11+transformed+with+Unix-inspired+aesthetics;Complete+terminal+and+shell+customization" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=500&color=8B949E&center=true&vCenter=true&width=800&lines=Windows+11+transformed+with+Unix-inspired+aesthetics;Tiling+window+manager+%2B+beautiful+status+bar;Complete+terminal+and+shell+customization" alt="Typing SVG" />
 
 </div>
 
@@ -42,10 +42,14 @@ impl Windots {
     pub fn tools(&self) -> Vec<&str> {
         vec![
             "📦 Scoop - Package management",
+            "⌨️ Oh My Posh - Shell prompt",
+            "🖼️ Fastfetch - System info display",
             "📝 VSCode - Code editing",
             "📓 Obsidian - Note taking",
             "🦊 Brave - Web browsing",
             "🎵 Spotify - Music streaming",
+            "🎮 Steam - Gaming platform",
+            "💬 Vencord - Discord client mod",
             "🔧 Git - Version control",
         ]
     }
@@ -62,7 +66,7 @@ impl Windots {
 
 ### 🎯 What's Included
 
-**⌨️ Windows Terminal** • **🎨 Catppuccin Theme** • **📝 VSCode Config**
+**⌨️ Windows Terminal** • **🎨 Catppuccin Theme** • **✨ Oh My Posh** • **🖼️ Fastfetch** • **📝 VSCode Config** • **🌐 Brave Browser** • **🎮 Steam Skinning** • **💬 Vencord Theming**
 
 *Minimal, clean, productive — Unix vibes on Windows*
 
@@ -78,7 +82,7 @@ impl Windots {
 
 <img src="https://skillicons.dev/icons?i=windows,linux,git,vscode,obsidian" height="50"/>
 
-**Windows 11** • **WSL2** • **Scoop** • **Catppuccin** • **JetBrainsMono Nerd Font**
+**Windows 11** • **WSL2** • **Scoop** • **Catppuccin** • **JetBrainsMono Nerd Font** • **Fastfetch**
 
 </div>
 
@@ -96,13 +100,17 @@ OS: Windows 11 + WSL2
 Package Manager: Scoop 📦
 Theme: Catppuccin Mocha 🎨
 Font: JetBrainsMono Nerd Font 🔤
+Sysinfo: Fastfetch 🖼️
 
 # Applications
 Terminal: Windows Terminal ⌨️
+Shell: PowerShell + Oh My Posh 🎨
 Editor: VSCode 📝
 Notes: Obsidian 📓
 Browser: Brave 🦊
+Chat: Discord + Vencord 💬
 Music: Spotify 🎵
+Gaming: Steam 🎮
 Version Control: Git 🔧
 ```
 
@@ -125,12 +133,25 @@ scoop install git
 # Add required buckets
 scoop bucket add extras
 scoop bucket add nerd-fonts
+scoop bucket add games
 
 # Install JetBrainsMono Nerd Font
 scoop install JetBrainsMono-NF
 
+# Install Windows Terminal
+scoop install windows-terminal
+
+# Install Fastfetch
+scoop install fastfetch
+
 # Install other tools
-scoop install vscode obsidian brave
+scoop install vscode obsidian brave steam
+
+# Install Oh My Posh
+winget install JanDeDobbeleer.OhMyPosh --source winget
+
+# Install Discord (standard installation for Vencord compatibility)
+winget install Discord.Discord
 ```
 
 ### ⚡ Installation
@@ -149,6 +170,57 @@ cd windots
 ---
 
 ## 🔧 Detailed Setup Guide
+
+<details>
+<summary><b>🖼️ Fastfetch Configuration</b></summary>
+
+<br>
+
+**Copy Configuration**
+```powershell
+# Fastfetch config location
+windots/.config/fastfetch/config.jsonc → %USERPROFILE%\.config\fastfetch\config.jsonc
+
+# Or create the directory and copy
+mkdir -p $env:USERPROFILE\.config\fastfetch
+Copy-Item windots\.config\fastfetch\config.jsonc $env:USERPROFILE\.config\fastfetch\
+```
+
+**Run Fastfetch**
+```powershell
+# Just run
+fastfetch
+
+# Or with custom config
+fastfetch --config $env:USERPROFILE\.config\fastfetch\config.jsonc
+```
+
+**Add to PowerShell Profile (Optional)**
+```powershell
+# Add to your profile to run on terminal startup
+# Edit: $PROFILE
+fastfetch
+```
+
+**Catppuccin Theme for Fastfetch**
+
+The config uses Catppuccin Mocha colors:
+- Rosewater: `#f5e0dc`
+- Flamingo: `#f2cdcd`
+- Pink: `#f5c2e7`
+- Mauve: `#cba6f7`
+- Red: `#f38ba8`
+- Maroon: `#eba0ac`
+- Peach: `#fab387`
+- Yellow: `#f9e2af`
+- Green: `#a6e3a1`
+- Teal: `#94e2d5`
+- Sky: `#89dceb`
+- Sapphire: `#74c7ec`
+- Blue: `#89b4fa`
+- Lavender: `#b4befe`
+
+</details>
 
 <details>
 <summary><b>📝 VSCode Configuration</b></summary>
@@ -177,23 +249,20 @@ windots/.config/vscode/settings.json → %APPDATA%\Code\User\settings.json
 </details>
 
 <details>
-<summary><b>🌐 Firefox Styling</b></summary>
+<summary><b>🌐 Brave Browser</b></summary>
 
 <br>
 
-**Enable userChrome**
-1. Go to `about:config`
-2. Set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
+**Apply Catppuccin Theme**
+1. Open Brave Settings
+2. Go to Appearance → Theme
+3. Click "Get themes" or visit Chrome Web Store
+4. Search for "Catppuccin"
+5. Install and apply
 
-**Copy CSS Files**
-```
-windots/.config/firefox/userChrome.css → <Profile Folder>/chrome/userChrome.css
-windots/.config/firefox/userContent.css → <Profile Folder>/chrome/userContent.css
-```
-
-**Find profile folder:** `about:support` → "Profile Folder"
-
-**Restart Firefox** for changes to take effect.
+**Custom New Tab Page**
+- Install a custom startpage extension
+- Or set custom homepage with your own HTML
 
 </details>
 
@@ -242,6 +311,90 @@ spicetify apply
 </details>
 
 <details>
+<summary><b>💬 Vencord Setup</b></summary>
+
+<br>
+
+**Install Vencord**
+```powershell
+# Install Discord directly (not via Scoop - Vencord needs standard path)
+# Download from: https://discord.com/download
+# Or use winget:
+winget install Discord.Discord
+
+# Install Vencord from official website
+# Visit: https://vencord.dev/download
+# Download VencordInstaller.exe and run it
+# Select "Install Vencord" and follow the prompts
+```
+
+**Apply Catppuccin Theme**
+1. Open Discord
+2. Click User Settings (gear icon)
+3. Scroll to Vencord → Themes
+4. Click "Online Themes"
+5. Search for "Catppuccin"
+6. Click "Apply" on Catppuccin Mocha
+
+**Or manually add theme:**
+1. User Settings → Vencord → Themes
+2. Click "Open Themes Folder"
+3. Copy Catppuccin theme CSS file
+4. Enable in Vencord themes list
+
+**Theme URL:**
+```
+https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css
+```
+
+**Recommended Plugins**
+
+Enable these plugins in User Settings → Vencord → Plugins:
+
+*Interface & UX*
+- **Better Role Context** - Improved role display in context menus
+- **BetterUploadButton** - Enhanced file upload interface
+- **ShowHiddenChannels** - See hidden channels (read-only)
+- **PinDMs** - Pin DMs and group chats to the top
+- **MessageLogger** - Logs deleted and edited messages
+- **ClearURLs** - Removes tracking from URLs
+- **CopyUserURLs** - Copy user profile URLs easily
+
+*Media & Embeds*
+- **ImageZoom** - Click to zoom images
+- **VoiceMessages** - Send voice messages
+- **ViewIcons** - View server and user icons in full size
+- **BetterGifAltText** - Better alt text for GIFs
+- **PermissionsViewer** - View permissions for roles and users
+
+*Privacy & Security*
+- **No Track** - Disable Discord's tracking
+- **FakeNitro** - Use emotes and stickers without Nitro
+- **AnonymiseFileNames** - Anonymize uploaded file names
+- **NoDevtoolsWarning** - Remove devtools warning
+
+*Functionality*
+- **MessageLinkEmbeds** - Embed message links
+- **SilentTyping** - Hide typing indicator
+- **BiggerStreamPreview** - Larger stream preview thumbnails
+- **QuickReply** - Quick reply to messages
+- **LastFMRichPresence** - Show Last.fm activity
+
+*Customization*
+- **BetterNotesBox** - Improved notes textarea
+- **ReviewDB** - User review system integration
+- **ServerProfile** - Enhanced server profiles
+- **GameActivityToggle** - Quickly toggle game activity
+
+**Plugin Configuration Tips:**
+- Customize MessageLogger to your preferences
+- Configure FakeNitro emoji settings
+- Set up LastFM integration if you use it
+- Adjust ImageZoom zoom levels in settings
+
+</details>
+
+<details>
 <summary><b>>_ Terminal Setup</b></summary>
 
 <br>
@@ -251,7 +404,30 @@ spicetify apply
 windots/.config/terminal/settings.json → %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 ```
 
+**OhMyPosh**
+```
+oh-my-posh init pwsh --config "$env:USERPROFILE\Documents\windots\.config\ohmyposh\config.toml" | Invoke-Expression
+```
+
+**PowerShell Profile**
+```
+windots/.config/powershell/profile.ps1 → %USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+```
+
 **Restart Terminal** to apply changes.
+
+</details>
+
+<details>
+<summary><b>🔧 Git Configuration</b></summary>
+
+<br>
+
+**Set up your identity**
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
 
 </details>
 
@@ -288,9 +464,12 @@ interface Roadmap {
 const todo: Roadmap = {
   current: [
     "📝 VSCode configuration",
-    "🦊 Firefox styling",
+    "🦊 Brave theming",
     "📓 Obsidian theming",
     "🎵 Spotify customization",
+    "💬 Vencord themes",
+    "🎮 Steam skinning",
+    "🖼️ Fastfetch configuration",
   ],
   planned: [
     "🔧 Automated setup script",
@@ -326,7 +505,7 @@ Have questions, ideas, or want to share your setup?
 
 Thanks to the amazing open-source community:
 
-**[Catppuccin](https://catppuccin.com)** • **[r/unixporn](https://reddit.com/r/unixporn)** • **[r/desktops](https://reddit.com/r/desktops)**
+**[Catppuccin](https://catppuccin.com)** • **[Fastfetch](https://github.com/fastfetch-cli/fastfetch)** • **[r/unixporn](https://reddit.com/r/unixporn)** • **[r/desktops](https://reddit.com/r/desktops)**
 
 *More credits will be added as tools and configs are integrated*
 
@@ -346,6 +525,21 @@ Thanks to the amazing open-source community:
 ### ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=0x0Dx/windots&type=Date&theme=dark)](https://star-history.com/#0x0Dx/windots&Date)
+
+</div>
+
+---
+
+## 💵 Support
+
+If you find this project helpful, consider supporting it:
+
+<div align="center">
+
+[![GitHub Sponsor](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&color=CBA6F7&logoColor=white&labelColor=101010)](https://github.com/sponsors/0x0Dx)
+[![Buy Me A Coffee](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?style=for-the-badge&logo=buy-me-a-coffee&color=CBA6F7&logoColor=white&labelColor=101010)](https://buymeacoffee.com/0x0dx)
+
+**Your support helps me maintain and improve this project!** 💖
 
 </div>
 
